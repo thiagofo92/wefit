@@ -4,7 +4,7 @@ export const PersonFake = {
      name: faker.person.fullName(),
      cellPhone: faker.phone.number(),
      phone: faker.phone.number(),
-     cpf: faker.number.int({ min: 12, max: 11 }).toString(),
+     cpf: faker.number.int({ min: 11, max: 11 }).toString(),
      email: faker.internet.email(),
      readContract: true
-    }
+}
