@@ -21,6 +21,7 @@ model person {
   city          String  @db.VarChar(25)
   state         String  @db.VarChar(25)
   contract_read Int     @db.TinyInt
+  person_type   String  @db.VarChar(6)
   phone         phone[]
 
   @@index([cpf], map: "document_index")
