@@ -20,6 +20,7 @@ export class PersonNaturalEntity implements PersonEntity, Omit<AddressEntity, 'p
   readonly state: string
   readonly phone: PhoneEntity[]
   readonly contractRead: boolean
+  readonly personType: string
 
   constructor (person: PersonEntity, address: Address, phone: PhoneEntity[]) {
     this.id = randomUUID()
@@ -27,6 +28,7 @@ export class PersonNaturalEntity implements PersonEntity, Omit<AddressEntity, 'p
     this.name = person.name
     this.email = person.email
     this.cpf = person.cpf
+    this.personType = 'natural'
     this.addressLine1 = address.addressLine1
     this.addressLine2 = address.addressLine2
     this.addressNumber = address.addressNumber
