@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll } from 'vitest'
 import { PersonNaturalFake } from '@/__mocks__/person.fake'
 import { Connection } from '@/infra/repository/prisma/connection'
 import { type PersonNaturalEntity } from '@/entities/person-natural.entity'
-import { PersonNaturalRepository } from '@/infra/repository/person-natural.repository'
+import { PersonNaturalRepository } from '@/infra/repository/prisma/person-natural.repository'
 
 describe('# Register person', () => {
   beforeAll(async () => {
