@@ -1,27 +1,19 @@
 import { describe, it, vi, expect } from 'vitest'
 import { Result } from 'true-myth'
-import { faker } from '@faker-js/faker'
+import { PersonFake } from 'src/__mocks__/person.fake'
 
 interface PersonEntity {
   name: string
   cellPhone: string
   phone: string
   email: string
+  readContract: boolean
 }
 
 type PersonNaturalEntity = {
   cpf: string
 } & PersonEntity
 
-type Address = {
-  addressLine1: string
-  addressLine2: string
-  addressNumber: number
-  neighbourhood:string
-  zipcode: string
-  city: string
-  state: string
-}
 const Data: PersonNaturalEntity [] = []
 
 interface PersonNaturalServicePort {
@@ -42,13 +34,7 @@ class PersonNaturalService implements PersonNaturalServicePort {
 describe('# Register person', () => { 
   it('Register natural person', async () => {
     const service = new PersonNaturalService()
-    const personNatural: PersonNaturalEntity = {
-     name: faker.person.fullName(),
-     cellPhone: faker.phone.number(),
-     phone: faker.phone.number(),
-     cpf: faker.number.int({ min: 12, max: 11 }).toString(),
-     email: faker.internet.email()
-    }
+    const personNatural: PersonNaturalEntity = PersonFake
     
     const result = await service.create(personNatural)
     if(result.isErr) throw Error('Register natural person Error')
