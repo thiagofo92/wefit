@@ -1,0 +1,5 @@
+export * from './addess.entity'
+export * from './person-legal.entity'
+export * from './person-natural.entity'
+export * from './person.entity'
+export * from './phone.entity'
