@@ -1,5 +1,5 @@
 import { PersonLegalMemoryRepository } from '@/infra/repository/memory/person-legal.repository'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { PersonLegalUseCase } from '../usecase/person-legal.usecase'
 import { personLegalFakeDto } from '../__mocks__/person-legal.fake.dto'
 import { type PersonLegalRepositoryPort } from '@/infra/port'
@@ -17,6 +17,9 @@ function factoryUsecase (): FactoryUseCase {
 }
 
 describe('# Use case legal person test', () => {
+  beforeEach(() => {
+    vi.resetAllMocks()
+  })
   it('Success case to create the legal person', async () => {
     const { usecase } = factoryUsecase()
     const person = personLegalFakeDto
