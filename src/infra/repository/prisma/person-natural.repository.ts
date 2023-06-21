@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import { type PersonNaturalEntity } from '@/entities/person-natural.entity'
+import { type PersonNaturalEntity } from '@/core/entities/person-natural.entity'
 import { Result } from 'true-myth'
 import { type PersonNaturalRepositoryPort } from '../../port/person-natural.port'
 import { Connection } from './connection'

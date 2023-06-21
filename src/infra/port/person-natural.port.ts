@@ -1,4 +1,4 @@
-import { type PersonNaturalEntity } from '@/entities/person-natural.entity'
+import { type PersonNaturalEntity } from '@/core/entities/person-natural.entity'
 import { type Result } from 'true-myth'
 
 export interface PersonNaturalRepositoryPort {
