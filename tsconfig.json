@@ -3,7 +3,10 @@
     "target": "ES2022",
     "module": "commonjs",
     "rootDir": "./src",
-    "baseUrl": ".",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    },
     "outDir": "./dist",
     "strict": true,
     "strictPropertyInitialization": false,
@@ -15,6 +18,6 @@
     "experimentalDecorators": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules", "vitest.config.ts"
   ]
 }
