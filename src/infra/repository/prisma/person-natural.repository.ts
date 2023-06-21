@@ -1,17 +1,14 @@
-import { randomUUID } from 'crypto'
 import { type PersonNaturalEntity } from '@/core/entities/person-natural.entity'
 import { Result } from 'true-myth'
 import { type PersonNaturalRepositoryPort } from '../../port/person-natural.port'
 import { Connection } from './connection'
 
-export class PersonNaturalRepository implements PersonNaturalRepositoryPort {
+export class PersonNaturalPrismaRepository implements PersonNaturalRepositoryPort {
   async create (person: PersonNaturalEntity): Promise<Result<boolean, Error>> {
     try {
-      const id = randomUUID()
-
       await Connection.person.create({
         data: {
-          id,
+          id: person.id,
           name: person.name,
           email: person.email,
           cpf: person.cpf,
@@ -23,6 +20,7 @@ export class PersonNaturalRepository implements PersonNaturalRepositoryPort {
           contract_read: Number(person.contractRead),
           zipcode: person.zipcode,
           state: person.state,
+          person_type: person.personType,
           phone: {
             createMany: {
               data: person.phone
