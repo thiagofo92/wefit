@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,34 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model person {
+  id            String  @id @default("UUID()") @db.VarChar(32)
+  name          String  @db.VarChar(25)
+  email         String  @db.VarChar(30)
+  document      String  @db.VarChar(14)
+  document_type String  @db.VarChar(5)
+  contract_read Int     @db.TinyInt
+  address_line1 String  @db.VarChar(25)
+  address_line2 String  @db.VarChar(25)
+  address_numer Int
+  neighborhood  String  @db.VarChar(15)
+  zipcode       String  @db.VarChar(8)
+  city          String  @db.VarChar(25)
+  state         String  @db.VarChar(25)
+  phone         phone[]
+
+  @@index([document], map: "document_index")
+  @@index([id], map: "id_index")
+}
+
+model phone {
+  id       Int    @id @default(autoincrement())
+  personId String @db.VarChar(32)
+  number   Int
+  type     String @db.VarChar(9)
+  person   person @relation(fields: [personId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "personId_fk_person")
+
+  @@index([personId], map: "personId_fk_person_idx")
 }
