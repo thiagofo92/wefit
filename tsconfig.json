@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2022",
     "module": "commonjs",
+    "rootDir": "./src",
+    "baseUrl": ".",
     "outDir": "./dist",
     "strict": true,
     "strictPropertyInitialization": false,
@@ -11,5 +13,8 @@
     "emitDecoratorMetadata": true,
 
     "experimentalDecorators": true
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
