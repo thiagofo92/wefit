@@ -3,13 +3,14 @@ import { type AddressEntity } from './addess.entity'
 import { type PersonEntity } from './person.entity'
 import { type PhoneEntity } from './phone.entity'
 
+type Address = Omit<AddressEntity, 'personId'>
+
 export class PersonNaturalEntity implements PersonEntity, Omit<AddressEntity, 'personId'> {
   readonly id: string
 
   readonly name: string
   readonly email: string
-  readonly document: string
-  readonly documentType: string
+  readonly cpf: string
   readonly addressLine1: string
   readonly addressLine2: string
   readonly addressNumber: number
@@ -20,13 +21,12 @@ export class PersonNaturalEntity implements PersonEntity, Omit<AddressEntity, 'p
   readonly phone: PhoneEntity[]
   readonly contractRead: boolean
 
-  constructor (person: PersonEntity, document: string, address: Omit<AddressEntity, 'personId'>, phone: PhoneEntity[]) {
+  constructor (person: PersonEntity, address: Address, phone: PhoneEntity[]) {
     this.id = randomUUID()
 
     this.name = person.name
     this.email = person.email
-    this.document = document
-    this.documentType = 'CPF'
+    this.cpf = person.cpf
     this.addressLine1 = address.addressLine1
     this.addressLine2 = address.addressLine2
     this.addressNumber = address.addressNumber

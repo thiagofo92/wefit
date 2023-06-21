@@ -3,3 +3,8 @@ export interface PhoneEntity {
   number: string
   type: string
 }
+
+export enum PhoneType {
+  cell = 'cell-phone',
+  phone = 'phone'
+}
