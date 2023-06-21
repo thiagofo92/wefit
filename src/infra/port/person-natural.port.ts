@@ -1,6 +1,6 @@
-import { PersonNaturalEntity } from "@/entities/person-natural.entity";
-import { Result } from "true-myth";
+import { type PersonNaturalEntity } from '@/entities/person-natural.entity'
+import { type Result } from 'true-myth'
 
-export interface PersonNaturalServicePort {
+export interface PersonNaturalRepositoryPort {
   create: (input: PersonNaturalEntity) => Promise<Result<boolean, Error>>
 }
