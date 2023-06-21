@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest'
-import { PersonNaturalFake } from '@/__mocks__/person.fake'
+import { PersonNaturalFake } from '@/infra/repository/__mocks__/person-natural.fake'
 import { Connection } from '@/infra/repository/prisma/connection'
 import { type PersonNaturalEntity } from '@/core/entities/person-natural.entity'
 import { PersonNaturalRepository } from '@/infra/repository/prisma/person-natural.repository'
