@@ -16,7 +16,7 @@ function factoryPersonUsecase (): FactoryPerson {
   return { usecase, service }
 }
 
-describe.only('# Usecase PersonNatural', () => {
+describe('# Usecase PersonNatural', () => {
   beforeEach(() => {
     vi.resetAllMocks()
   })
