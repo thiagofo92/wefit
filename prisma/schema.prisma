@@ -11,8 +11,8 @@ model person {
   id            String  @id @db.VarChar(36)
   name          String  @db.VarChar(25)
   email         String  @db.VarChar(30)
-  document      String  @db.VarChar(14)
-  document_type String  @db.VarChar(5)
+  cpf           String  @db.VarChar(11)
+  cnpj          String? @db.VarChar(14)
   address_line1 String  @db.VarChar(25)
   address_line2 String  @db.VarChar(25)
   address_numer Int
@@ -23,13 +23,13 @@ model person {
   contract_read Int     @db.TinyInt
   phone         phone[]
 
-  @@index([document], map: "document_index")
+  @@index([cpf], map: "document_index")
   @@index([id], map: "id_index")
 }
 
 model phone {
   id       Int    @id @default(autoincrement())
-  personId String @db.VarChar(32)
+  personId String @db.VarChar(36)
   number   String @db.VarChar(15)
   type     String @db.VarChar(9)
   person   person @relation(fields: [personId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "personId_fk_person")
