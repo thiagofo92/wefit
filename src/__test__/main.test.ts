@@ -1,29 +1,19 @@
 import { describe, it, vi, expect } from 'vitest'
 import { Result } from 'true-myth'
-import { PersonFake } from 'src/__mocks__/person.fake'
+import { PersonFake } from '@/__mocks__/person.fake'
+import { Connection } from '@/infra/repository/prisma/connection'
+import { PersonNaturalEntity } from '@/entities/person-natural.entity'
+import { PersonNaturalServicePort } from '@/infra/port/person-natural.port'
 
-interface PersonEntity {
-  name: string
-  cellPhone: string
-  phone: string
-  email: string
-  readContract: boolean
-}
-
-type PersonNaturalEntity = {
-  cpf: string
-} & PersonEntity
-
-const Data: PersonNaturalEntity [] = []
-
-interface PersonNaturalServicePort {
-  create: (input: PersonNaturalEntity) => Promise<Result<boolean, Error>>
-}
 
 class PersonNaturalService implements PersonNaturalServicePort {
-  async create(input: PersonNaturalEntity): Promise<Result<boolean, Error>> {
-    Data.push(input)
-    return Result.ok(true)
+  async create(person: PersonNaturalEntity): Promise<Result<boolean, Error>> {
+    try {
+     const result = await Connection.person(person)
+     return Result.ok(true) 
+    } catch (error: any) {
+     return Result.err(error) 
+    }
   }
 
   async findAll(): Promise<PersonNaturalEntity []> {
@@ -32,6 +22,7 @@ class PersonNaturalService implements PersonNaturalServicePort {
 }
 
 describe('# Register person', () => { 
+
   it('Register natural person', async () => {
     const service = new PersonNaturalService()
     const personNatural: PersonNaturalEntity = PersonFake
