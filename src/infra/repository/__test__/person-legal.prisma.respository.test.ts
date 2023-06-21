@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { PersonLegalPrismaRepository } from '../prisma/person-legal.repository'
 import { PersonLegalFake } from '../__mocks__/person-legal.fake'
 
-describe.only('# Legal person prisma reposityro', () => {
+describe('# Legal person prisma reposityro', () => {
   it('Create the legal person', async () => {
     const person = PersonLegalFake
     const repository = new PersonLegalPrismaRepository()
