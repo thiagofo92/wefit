@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll } from 'vitest'
 import { PersonNaturalFake } from '@/infra/repository/__mocks__/person-natural.fake'
 import { Connection } from '@/infra/repository/prisma/connection'
 import { type PersonNaturalEntity } from '@/core/entities/person-natural.entity'
-import { PersonNaturalRepository } from '@/infra/repository/prisma/person-natural.repository'
+import { PersonNaturalPrismaRepository } from '@/infra/repository/prisma/person-natural.repository'
 
 describe('# Register person', () => {
   beforeAll(async () => {
@@ -11,7 +11,7 @@ describe('# Register person', () => {
   })
 
   it('Register natural person', async () => {
-    const service = new PersonNaturalRepository()
+    const service = new PersonNaturalPrismaRepository()
     const personNatural: PersonNaturalEntity = PersonNaturalFake
 
     const result = await service.create(personNatural)
