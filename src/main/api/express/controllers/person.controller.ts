@@ -26,6 +26,6 @@ export class PersonController {
       }
     }
 
-    res.status(HTTP_STATUS.CREATED).json({ message: 'Sucess' })
+    res.status(HTTP_STATUS.CREATED).json({ message: 'Success' })
   }
 }
