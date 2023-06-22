@@ -2,6 +2,7 @@ import { type PersonLegalEntity } from '@/core/entities/person-legal.entity'
 import { type PersonLegalRepositoryPort } from '@/infra/port/person-legal.port'
 import { Connection } from './connection'
 import { right, type Either, left } from '@/shared/error/Either'
+import { Logger } from '@/shared/logs/logger'
 
 export class PersonLegalPrismaRepository implements PersonLegalRepositoryPort {
   async create (person: PersonLegalEntity): Promise<Either<Error, boolean>> {
@@ -31,6 +32,7 @@ export class PersonLegalPrismaRepository implements PersonLegalRepositoryPort {
       })
       return right(true)
     } catch (error: any) {
+      Logger.error(error.message)
       return left(error)
     }
   }

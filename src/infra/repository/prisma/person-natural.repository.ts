@@ -2,6 +2,7 @@ import { type PersonNaturalEntity } from '@/core/entities/person-natural.entity'
 import { type PersonNaturalRepositoryPort } from '../../port/person-natural.port'
 import { Connection } from './connection'
 import { right, type Either, left } from '@/shared/error/Either'
+import { Logger } from '@/shared/logs/logger'
 
 export class PersonNaturalPrismaRepository implements PersonNaturalRepositoryPort {
   async create (person: PersonNaturalEntity): Promise<Either<Error, boolean>> {
@@ -31,6 +32,7 @@ export class PersonNaturalPrismaRepository implements PersonNaturalRepositoryPor
 
       return right(true)
     } catch (error: any) {
+      Logger.error(error.message)
       return left(error)
     }
   }
