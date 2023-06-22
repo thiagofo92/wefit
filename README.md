@@ -1,23 +1,67 @@
-## Backend - Wefit
+# API WeFit
 
-Seja bem vindo ao teste de backend da Wefit.
+## Descrição
 
-### Para iniciar o banco de dados é necessario ter o docker-compose instalado em sua máquina e rodar o seguinte comando:
+API para efetuar o cadastro de pessoa fisíca ou jurídica
 
-    docker-compose up -D
+## Detalhes de como montar o ambiente
 
-o docker-compose vai criar um container de um MySQL e você poderá acessar via localhost:3306 e a senha do usuário **root** é **senha_root_123**
+* Instalar o Node JS caso não tenha, [Node JS link](https://nodejs.org/en/download/package-manager/)
+* Versão do Node JS utilizada: 18.13.0
+* Pode ser usado o NPM ou YARN para gerenciar o node_modules
+* Instalar o Docker [Docker link](https://docs.docker.com/desktop/install/windows-install/)
+* Instalar o Docker composer [Docker Compose Link](https://docs.docker.com/compose/install/)
+* Efetue a instalação do **node_modules** usando **npm install** ou **yarn**
+* Execute o commando **npx run test** ou **yarn test** para verificar se está tudo funcionando## Como executar
+* Execute o comando **npm run build** ou **yarn build** para criar o a pasta **dist**, será a pasta de produção
+* Executar o comando **docker-compose up -d** para criar o container com o Docker
+* É necessário ao menos ter o container do banco de dados
 
-### Para iniciar o servidor express basta executar o seguinte comando:
+## Detalhes sobre a API
 
-    npm start
-    ou
-    yarn start
+* A Api possui uma rota para acessar a documentação do swagger http://servidor:porta/api-docs
+* Respostas de Sucesso
+  * true
+  * Status Code 201 sucesso
+* Respostas de Erro
+  * messagem(String)
+  * Status Code 404 (conteúdo não encontrado)
+  * Status Code 400 (parâmetros faltando)
+  * Status Code 500 para erro interno
 
-Depois que concluir seu teste não de enviar o seu código junto a pasta data, nela está salvo o volume do MySQL criado pelo docker.
+## Estrura base do projeto
 
-Boa sorte =)
+* A **main** dentro da **src** inicia o servidor
+* A pasta **infra** contém as aplicações de terceiros
+* A pasta **core** contém as regras de negócio
+* A pasta **app** contém as regras da aplicação, como o gerenciamento de quais classes vão ser chamadas e formatação de dados
+* A pasta **shared** contém os arquivos que são acessado por várias pastas
 
-### Desafio
+## Exemplo de Request
+~~~json
+{
+  "personType": "natural",
+  "cpf": "11111111111",
+  "cnpj":"",
+  "name": "Test",
+  "cellPhone": "111111111",
+  "phone": "11111111",
+  "email": "test@test.com",
+  "confirmeEmail": "test@test.com",
+  "address": {
+    "zipcode": "00113700",
+    "addressLine1": "Ave Sao caetano",
+    "addressNumber": 309,
+    "addressLine2": "asdasd",
+    "city":  "Sao Paulo",
+    "state":"SP",
+    "neighborhood":"Luz"
+  },
+  "contractRead": true
+}
+~~~
 
-Criar o endpoint necessário para a tela da seguinte imagem funcionar corretamente. Favor considerar as boas práticas necessárias para esse caso de uso.
+## Informações sobre o projeto
+* Arquitetura base - [Port and Adapter](https://alistair.cockburn.us/hexagonal-architecture/)
+* Tratativas de erros - [Either Error](https://blog.logrocket.com/javascript-either-monad-error-handling/)
+* PM2 para executar o projeto no container - [PM2](https://pm2.keymetrics.io/)
