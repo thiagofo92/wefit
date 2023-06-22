@@ -15,7 +15,7 @@ describe('# Register person', () => {
     const personNatural: PersonNaturalEntity = PersonNaturalFake
 
     const result = await service.create(personNatural)
-    if (result.isErr) throw result.error
+    if (result.isLeft()) throw result.value
 
     expect(result.value).toBeTruthy()
   })

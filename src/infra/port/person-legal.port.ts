@@ -1,6 +1,5 @@
 import { type PersonLegalEntity } from '@/core/entities/person-legal.entity'
-import { type Result } from 'true-myth'
-
+import { type Either } from '@/shared/error/Either'
 export interface PersonLegalRepositoryPort {
-  create: (person: PersonLegalEntity) => Promise<Result<boolean, Error>>
+  create: (person: PersonLegalEntity) => Promise<Either<Error, boolean>>
 }

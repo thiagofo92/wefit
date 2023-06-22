@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { PersonLegalUseCase } from '../usecase/person-legal.usecase'
 import { personLegalFakeDto } from '../__mocks__/person-legal.fake.dto'
 import { type PersonLegalRepositoryPort } from '@/infra/port'
-import { Result } from 'true-myth'
+import { left } from '@/shared/error/Either'
 
 interface FactoryUseCase {
   usecase: PersonLegalUseCase
@@ -25,7 +25,7 @@ describe('# Use case legal person test', () => {
     const person = personLegalFakeDto
     const result = await usecase.create(person)
 
-    if (result.isErr) throw Error('Error in teste to create the legal person - Success Case')
+    if (result.isLeft()) throw Error('Error in teste to create the legal person - Success Case')
 
     expect(result.value).toStrictEqual(true)
   })
@@ -34,11 +34,11 @@ describe('# Use case legal person test', () => {
     const { usecase, repository } = factoryUsecase()
     const person = personLegalFakeDto
 
-    vi.spyOn(repository, 'create').mockResolvedValueOnce(Result.err(new Error('Fail case to create legal person')))
+    vi.spyOn(repository, 'create').mockResolvedValueOnce(left(new Error('Fail case to create legal person')))
     const result = await usecase.create(person)
 
-    if (result.isOk) throw Error('Error in test to create the legal person - Fail Case')
+    if (result.isRight()) throw Error('Error in test to create the legal person - Fail Case')
 
-    expect(result.error).toStrictEqual(false)
+    expect(result.value).toStrictEqual(false)
   })
 })

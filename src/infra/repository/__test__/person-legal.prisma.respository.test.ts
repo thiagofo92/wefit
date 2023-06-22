@@ -9,7 +9,7 @@ describe('# Legal person prisma reposityro', () => {
 
     const result = await repository.create(person)
 
-    if (result.isErr) throw result.error
+    if (result.isLeft()) throw result.value
 
     expect(result.value).toStrictEqual(true)
   })

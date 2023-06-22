@@ -1,10 +1,10 @@
 import { type PersonNaturalEntity } from '@/core/entities/person-natural.entity'
-import { Result } from 'true-myth'
 import { type PersonNaturalRepositoryPort } from '../../port/person-natural.port'
 import { Connection } from './connection'
+import { right, type Either, left } from '@/shared/error/Either'
 
 export class PersonNaturalPrismaRepository implements PersonNaturalRepositoryPort {
-  async create (person: PersonNaturalEntity): Promise<Result<boolean, Error>> {
+  async create (person: PersonNaturalEntity): Promise<Either<Error, boolean>> {
     try {
       await Connection.person.create({
         data: {
@@ -29,9 +29,9 @@ export class PersonNaturalPrismaRepository implements PersonNaturalRepositoryPor
         }
       })
 
-      return Result.ok(true)
+      return right(true)
     } catch (error: any) {
-      return Result.err(error)
+      return left(error)
     }
   }
 }

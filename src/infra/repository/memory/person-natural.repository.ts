@@ -1,12 +1,12 @@
 import { type PersonNaturalEntity } from '@/core/entities/person-natural.entity'
 import { type PersonNaturalRepositoryPort } from '@/infra/port/person-natural.port'
-import { Result } from 'true-myth'
+import { type Either, right } from '@/shared/error/Either'
 
 const Data: PersonNaturalEntity [] = []
 export class PersonNaturalMemoryRepository implements PersonNaturalRepositoryPort {
-  async create (input: PersonNaturalEntity): Promise<Result<boolean, Error>> {
+  async create (input: PersonNaturalEntity): Promise<Either<Error, boolean>> {
     Data.push(input)
 
-    return Result.ok(true)
+    return right(true)
   }
 }

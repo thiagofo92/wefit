@@ -1,20 +1,20 @@
-import { Result } from 'true-myth'
 import { type PersonNaturalUseCasePort } from '../port/person-natural.usecase.port'
 import { type PersonNaturalDto } from '../dto/person-natural.dto'
 import { type PersonNaturalRepositoryPort } from '@/infra/port/person-natural.port'
 import { PersonNaturalEntity } from '@/core/entities/person-natural.entity'
 import { type PersonEntity } from '@/core/entities/person.entity'
 import { PhoneType, type PhoneEntity } from '@/core/entities/phone.entity'
+import { type Either, left, right } from '@/shared/error/Either'
 
 export class PersonNaturalUseCase implements PersonNaturalUseCasePort {
   constructor (private readonly service: PersonNaturalRepositoryPort) {}
-  async create (personDto: PersonNaturalDto): Promise<Result<true, false>> {
+  async create (personDto: PersonNaturalDto): Promise<Either<false, true>> {
     const person = this.factoryPersonNatural(personDto)
     const result = await this.service.create(person)
 
-    if (result.isErr) return Result.err(false)
+    if (result.isLeft()) return left(false)
 
-    return Result.ok(true)
+    return right(true)
   }
 
   private factoryPersonNatural (personDto: PersonNaturalDto): PersonNaturalEntity {

@@ -3,7 +3,7 @@ import { PersonNaturalUseCase } from '../usecase/person-natural.usecase'
 import { personNaturalDtoFake } from '../__mocks__/person-natural.fake.dto'
 import { PersonNaturalMemoryRepository } from '@/infra/repository/memory/person-natural.repository'
 import { type PersonNaturalRepositoryPort } from '@/infra/port/person-natural.port'
-import { Result } from 'true-myth'
+import { left } from '@/shared/error/Either'
 
 interface FactoryPerson {
   usecase: PersonNaturalUseCase
@@ -24,7 +24,7 @@ describe('# Usecase PersonNatural', () => {
     const { usecase } = factoryPersonUsecase()
     const person = personNaturalDtoFake
     const result = await usecase.create(person)
-    if (result.isErr) throw Error('Error to create natural person UseCase')
+    if (result.isLeft()) throw Error('Error to create natural person UseCase')
 
     expect(result.value).toStrictEqual(true)
   })
@@ -32,10 +32,12 @@ describe('# Usecase PersonNatural', () => {
   it('Fail to create natural person', async () => {
     const { usecase, service } = factoryPersonUsecase()
     const person = personNaturalDtoFake
-    vi.spyOn(service, 'create').mockResolvedValueOnce(Result.err(new Error('Error test')))
-    const result = await usecase.create(person)
-    if (result.isOk) throw Error('Error to generate fail test in create natural person UseCase')
 
-    expect(result.error).toBeFalsy()
+    vi.spyOn(service, 'create').mockResolvedValueOnce(left(new Error('Error test')))
+
+    const result = await usecase.create(person)
+    if (result.isRight()) throw Error('Error to generate fail test in create natural person UseCase')
+
+    expect(result.value).toBeFalsy()
   })
 })

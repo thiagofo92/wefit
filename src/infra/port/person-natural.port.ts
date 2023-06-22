@@ -1,6 +1,6 @@
 import { type PersonNaturalEntity } from '@/core/entities/person-natural.entity'
-import { type Result } from 'true-myth'
+import { type Either } from '@/shared/error/Either'
 
 export interface PersonNaturalRepositoryPort {
-  create: (input: PersonNaturalEntity) => Promise<Result<boolean, Error>>
+  create: (input: PersonNaturalEntity) => Promise<Either<Error, boolean>>
 }
