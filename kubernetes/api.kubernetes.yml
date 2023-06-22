@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wefit-dp
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: wefit
+  template:
+    metadata:
+      labels:
+        app: wefit
+    spec:
+      containers:
+      - name: wefit-api
+        image: devtfo/wefit:test-1.0.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 4568
+        env:
+          - name: DATABASE_URL
+            value: "mysql://root:senha_root_123@10.43.135.30:3306/wefit"
