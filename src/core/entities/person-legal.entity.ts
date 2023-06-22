@@ -2,6 +2,7 @@ import { randomUUID } from 'crypto'
 import { type AddressEntity } from './addess.entity'
 import { type PersonEntity } from './person.entity'
 import { type PhoneEntity } from './phone.entity'
+import { PersonType } from './person-type.entity'
 
 type Address = Omit<AddressEntity, 'personId'>
 
@@ -21,7 +22,7 @@ export class PersonLegalEntity implements PersonEntity, Omit<AddressEntity, 'per
   readonly state: string
   readonly phone: PhoneEntity[]
   readonly contractRead: boolean
-  readonly personType: string
+  readonly personType: PersonType
 
   constructor (person: PersonEntity, address: Address, phone: PhoneEntity[], cnpj: string) {
     this.id = randomUUID()
@@ -30,7 +31,7 @@ export class PersonLegalEntity implements PersonEntity, Omit<AddressEntity, 'per
     this.email = person.email
     this.cpf = person.cpf
     this.cnpj = cnpj
-    this.personType = 'legal'
+    this.personType = PersonType.legal
     this.addressLine1 = address.addressLine1
     this.addressLine2 = address.addressLine2
     this.addressNumber = address.addressNumber
