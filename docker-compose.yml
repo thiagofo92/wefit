@@ -13,3 +13,12 @@ services:
       - $MYSQLDB_PORT:3306
     volumes:
       - ./data/:/var/lib/mysql
+  api:
+    env_file: ./.env.prod
+    build: .
+    container_name: wefit
+    links:
+      - "mysqldb:mysqldb"
+    ports:
+      - 4568:4568
+    
