@@ -41,7 +41,7 @@
               }
             },
             "400": {
-              "description": "Parametro(s) invalido(s)"
+              "description": "Parâmetro(s) invalido(s)"
             },
             "500": {
               "description": "Erro interno"
@@ -54,7 +54,7 @@
     "schemas": {
       "PersonRequest": {
         "type": "object",
-        "required": ["personType"],
+        "required": ["personType", "cpf", "name", "cellPhone", "phone", "email", "address", "contractRead"],
         "properties": {
           "personType": {
             "type": "string",

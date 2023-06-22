@@ -2,6 +2,7 @@
 import Express from 'express'
 import { helmetConfig, rateLimit } from '../../middlewares'
 import { FactoryControllerPerson } from '../../factory/person.controller.factory'
+import { personCreateMiddleware } from '../../middlewares/schema/person.schema'
 export class Router {
   constructor (private readonly routers: Express.Router) {}
 
@@ -11,7 +12,7 @@ export class Router {
 
   private person (): void {
     const controller = FactoryControllerPerson()
-    this.routers.post('/person', controller.create.bind(controller))
+    this.routers.post('/person', personCreateMiddleware, controller.create.bind(controller))
   }
 
   private middleware (): void {
