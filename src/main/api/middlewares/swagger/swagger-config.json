@@ -1,0 +1,144 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API WeFit",
+    "description": "API para cadastrar formulário de Pessoa física ou jurídica",
+    "version": "1.0.0",
+    "contact": {
+      "email": "thiago_hyd@hotmail.com"
+    }
+  },
+    "tags": [
+      {
+        "name": "Pessoa",
+        "description": "Operações referente a pessoa física e jurídica"
+      }
+    ],
+    "paths": {
+      "/api/person": {
+        "post": {
+          "tags": ["Pessoa"],
+          "description": "Cadastro de pessoa físca ou jurídica",
+          "requestBody": {
+            "description": "Dados para efetuar o cadastro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/PersonRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Dados cadastrados com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#components/schemas/PersonResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Parametro(s) invalido(s)"
+            },
+            "500": {
+              "description": "Erro interno"
+            }
+          }
+        }
+      }
+    },
+  "components": {
+    "schemas": {
+      "PersonRequest": {
+        "type": "object",
+        "required": ["personType"],
+        "properties": {
+          "personType": {
+            "type": "string",
+            "enum": ["natural", "legal"],
+            "description": "Tipo de pessoal a ser cadastrado pessoa física ou jurídica",
+            "example": "natural"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "11111111111"
+          },
+          "cnpj": {
+            "type": "string",
+            "description": "Em caso de pessoa jurídica esse campo deve ser preenchido",
+            "example": "222222222222222"
+          },
+          "name": {
+            "type": "string",
+            "example": "Test"
+          },
+          "cellPhone": {
+            "type": "string",
+            "example": "3333333333"
+          },
+          "phone": { 
+            "type": "string",
+            "example": "444444444"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@test.com"  
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "addressLine1": {
+                "type": "string",
+                "description": "Logradouro",
+                "example": "Ave Sao caetano"
+              },
+              "addressLine2": {
+                "type": "string",
+                "description": "Complemento",
+                "example": "apt 105"
+              },
+              "addressNumber": {
+                "type": "integer",
+                "example": 35
+              },
+              "zipcode": {
+                "type": "string",
+                "description": "Código postal",
+                "example": "05080-020"
+              },
+              "city": {
+                "type": "string",
+                "example": "São Paulo"
+              },
+              "state": {
+                "type": "string",
+                "example": "SP"
+              },
+              "neighborhood": {
+                "type": "string",
+                "example": "Luz"
+              }
+            }
+          },
+          "contractRead": {
+            "type": "boolean",
+            "description": "Termo de leitura",
+            "example": true
+          }
+        }
+      },
+      "PersonResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "sucess"
+          }
+        }
+      }
+    }
+  }
+}
