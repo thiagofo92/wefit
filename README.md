@@ -65,3 +65,4 @@ API para efetuar o cadastro de pessoa fisíca ou jurídica
 * Arquitetura base - [Port and Adapter](https://alistair.cockburn.us/hexagonal-architecture/)
 * Tratativas de erros - [Either Error](https://blog.logrocket.com/javascript-either-monad-error-handling/)
 * PM2 para executar o projeto no container - [PM2](https://pm2.keymetrics.io/)
+* Os pods do kubernates não está funcionando, faltou criar a comunicação entre eles
