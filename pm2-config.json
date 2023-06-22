@@ -1,0 +1,12 @@
+{
+  "apps": [
+    {
+      "name": "api-wefit",
+      "cwd": "/var/api/wefit/",
+      "script": "./main/index.js",
+      "watch": true,
+      "ignore_watch": "logs",
+      "log_date_format": "MM/DD/YYYY HH:mm:ss"
+    }
+  ]
+}
