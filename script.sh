@@ -1,0 +1,1 @@
+npm run migrate:create;pm2-runtime pm2-config.json
